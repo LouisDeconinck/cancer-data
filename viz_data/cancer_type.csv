@@ -1,0 +1,86 @@
+Name,Count
+Breast,201164
+Prostate,178972
+Bronchus and lung,153385
+Colon,109705
+Malignant neoplasms of skin,102295
+Rectum,45553
+Bladder,44067
+Malignant melanoma of skin,38881
+Non-Hodgkin-lymphoma,36751
+Kidney,31479
+Pancreas,29312
+Stomach,28120
+Corpus uteri,27649
+Unknown primary site,21032
+Oesophagus,19033
+Lymphoid leukaemia,17021
+Ovary,17002
+Thyroid gland,15911
+Multiple myeloma,15735
+Brain,15676
+Liver and intrahepatic bile ducts,14169
+Cervix uteri,12649
+Larynx,12375
+Myeloid leukaemia,12136
+Myelodysplastic syndromes,11555
+Melanoma of skin,7344
+Soft tissues,7254
+Testis,6515
+Myeloproliferative Disorders,6048
+Rectosigmoid junction,5607
+"Biliary tract, NOS",5347
+Small intestine,5306
+Mesothelioma,5205
+Hodgkin's disease,4854
+Tongue,4841
+Tonsil,4772
+Myeloproliferative neoplasms,4116
+Renal pelvis,4101
+Malignant immunoproliferative diseases,4056
+Vulva,3963
+Floor of mouth,3858
+Pyriform sinus,3215
+Anus and anal canal,3188
+Oropharynx,3021
+Ureter,2853
+Base of tongue,2697
+Eye and adnexa,2289
+Gallbladder,2045
+Non-Hodgkin lymphoma,2024
+Parotid gland,2002
+"Mouth, NOS",1973
+Palate,1941
+Monocytic leukaemia,1900
+Hypopharynx,1695
+Penis,1601
+Accessory sinuses,1512
+Retroperitoneum and peritoneum,1445
+Hodgkin lymphoma,1409
+"Bone and articular cartilage, NOS",1358
+Gum,1303
+"Female genital organs, NOS",1297
+Bone and articular cartilage of limbs,1290
+Lip,1284
+Adrenal gland,1209
+Nasopharynx,1138
+"Urinary organs, NOS",965
+Nasal cavity and middle ear,932
+Leukaemia other,917
+Vagina,896
+Thymus,879
+Kaposi's sarcoma,803
+"Heart, mediastinum and pleura",662
+Other ill-defined digestive organs,630
+"Lip, oral cavity and pharynx, NOS",618
+"Spinal cord, cranial nerves and CNS, NOS",604
+"Salivary glands, NOS",603
+"Lymphoid, haematopoietic and related tissue, NOS",593
+Uterus,545
+"Endocrine glands, NOS",488
+Other and ill-defined sites,446
+Meninges,378
+"Male genital organs, NOS",245
+Trachea,226
+Placenta,117
+"Respiratory system and intrathoracic organs, NOS",26
