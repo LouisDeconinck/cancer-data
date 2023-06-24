@@ -222,6 +222,7 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
 
         // Update tooltip content
         d3.select("#tooltip text")
+            .attr("fill", "white")
             .html(`<tspan x="10" y="25" font-weight="bold">${data[index].Year}</tspan>\n
       <tspan x="10"  dy="1.2em">M: ${maleCount.toLocaleString()}</tspan>\n
       <tspan x="10"  dy="1.2em">F: ${femaleCount.toLocaleString()}</tspan>`);
