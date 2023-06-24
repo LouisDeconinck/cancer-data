@@ -5,70 +5,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"
     integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    #graph_year_gender,
+    #graph_year {
+      float: left;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Data</h1>
-  <div id="my_dataviz"></div>
+  <h1>Cancer data in Belgium</h1>
 
+  <div id="graph_year_gender"></div>
+  <div id="graph_year"></div>
+  <div id="graph_gender"></div>
+
+
+  <script src="graphs/cancer_year_gender.js"></script>
+  <script src="graphs/cancer_year.js"></script>
+  <script src="graphs/cancer_gender.js"></script>
   <script>
-    // set the dimensions and margins of the graph
-    const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-      width = 460 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
 
-    // append the svg object to the body of the page
-    const svg = d3.select("#my_dataviz")
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    console.log('start')
-    //Read the data
-    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv").then(function (data) {
-      console.log('data read')
-      // group the data: I want to draw one line per group
-      const sumstat = d3.group(data, d => d.name); // nest function allows to group the calculation per level of a factor
 
-      // Add X axis --> it is a date format
-      const x = d3.scaleLinear()
-        .domain(d3.extent(data, function (d) { return d.year; }))
-        .range([0, width]);
-      svg.append("g")
-        .attr("transform", `translate(0, ${height})`)
-        .call(d3.axisBottom(x).ticks(5));
-
-      // Add Y axis
-      const y = d3.scaleLinear()
-        .domain([0, d3.max(data, function (d) { return +d.n; })])
-        .range([height, 0]);
-      svg.append("g")
-        .call(d3.axisLeft(y));
-
-      // color palette
-      const color = d3.scaleOrdinal()
-        .range(['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'])
-
-      // Draw the line
-      svg.selectAll(".line")
-        .data(sumstat)
-        .join("path")
-        .attr("fill", "none")
-        .attr("stroke", function (d) { return color(d[0]) })
-        .attr("stroke-width", 1.5)
-        .attr("d", function (d) {
-          return d3.line()
-            .x(function (d) { return x(d.year); })
-            .y(function (d) { return y(+d.n); })
-            (d[1])
-        })
-
-    })
   </script>
 </body>
 
