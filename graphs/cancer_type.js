@@ -1,37 +1,40 @@
 // Load the CSV file
-d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_data/cancer_age.csv").then(function (data) {
+d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_data/cancer_type.csv").then(function (data) {
     // Convert count values to numbers
     data.forEach(function (d) {
         d.Count = +d.Count;
     });
 
-    // Sort the data based on age
-    data.sort(function (a, b) {
-        var lowerAgeA = getLowerAgeLimit(a.Age);
-        var lowerAgeB = getLowerAgeLimit(b.Age);
-        return d3.ascending(lowerAgeA, lowerAgeB);
+    // Replace names
+    data.forEach(function (d) {
+        if (d.Name === "Malignant neoplasms of skin") {
+            d.Name = "Skin";
+        } else if (d.Name === "Bronchus and lung") {
+            d.Name = "Lung";
+        } else if (d.Name === "Melanoma of skin") {
+            d.Name = "Melanoma";
+        } else if (d.Name === "Non-Hodgkin-lymphoma") {
+            d.Name = "Lymphoma";
+        }
     });
 
-    // Function to extract the lower age limit from age range
-    function getLowerAgeLimit(ageRange) {
-        if (ageRange === "> 85") {
-            return 100; // Assign a large value for sorting purposes
-        }
-        return +ageRange.split(" - ")[0];
-    }
+    const otherData = data.slice(11);
+    // Sort the data by count in descending order and take the top 10
+    data = data.sort(function (a, b) {
+        return d3.descending(a.Count, b.Count);
+    }).slice(0, 11);
 
-    // Group data below 30 into a single bar labeled "< 30"
-    var groupedData = [];
-    var count = 0;
-    for (var i = 0; i < data.length; i++) {
-        var lowerAge = getLowerAgeLimit(data[i].Age);
-        if (lowerAge < 30) {
-            count += data[i].Count;
-        } else {
-            groupedData.push({ Age: data[i].Age, Count: data[i].Count });
-        }
-    }
-    groupedData.unshift({ Age: "< 30", Count: count });
+    // Group all types with a count less than the 10th type in a separate category called "Other"
+    const otherCount = d3.sum(otherData.slice(10), function (d) {
+        return d.Count;
+    });
+
+    data.push({ Name: "Other", Count: otherCount });
+
+    // Abbreviate type names to a maximum of 6 characters
+    data.forEach(function (d) {
+        d.Name = d.Name.slice(0, 8) + (d.Name.length > 8 ? "." : "");
+    });
 
     // Set up the dimensions and margins of the plot
     const margin = { top: 50, right: 20, bottom: 40, left: 60 };
@@ -39,7 +42,7 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
     const height = 300 - margin.top - margin.bottom;
 
     // Create the SVG element
-    const svg = d3.select("#graph_age")
+    const svg = d3.select("#graph_type")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -48,22 +51,22 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
 
     // Define the x and y scales
     const x = d3.scaleBand()
-        .domain(groupedData.map(function (d) { return d.Age; }))
+        .domain(data.map(function (d) { return d.Name; }))
         .range([0, width])
         .padding(0.1);
 
     const y = d3.scaleLinear()
-        .domain([0, Math.ceil(d3.max(groupedData, d => +d.Count) / 1000) * 1000])
+        .domain([0, Math.ceil(d3.max(data, d => +d.Count) / 20000) * 20000])
         .range([height, 0]);
 
     // Create the bars
     svg.selectAll(".bar")
-        .data(groupedData)
+        .data(data)
         .enter()
         .append("rect")
         .attr("class", "bar")
         .style("fill", "#006d77")
-        .attr("x", function (d) { return x(d.Age); })
+        .attr("x", function (d) { return x(d.Name); })
         .attr("width", x.bandwidth())
         .attr("y", function (d) { return y(d.Count); })
         .attr("height", function (d) { return height - y(d.Count); });
@@ -82,7 +85,7 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
         .attr("x", width / 2)
         .attr("y", -10)
         .attr("text-anchor", "middle")
-        .text("New cancer cases by age in 2020");
+        .text("New cancer cases by type in 2020");
 
     // Add x-axis label
     svg.append("text")
@@ -90,7 +93,7 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
         .attr("y", height + 30)
         .attr("text-anchor", "middle")
         .attr('font-size', '0.8em')
-        .text("Age");
+        .text("Type");
 
     // Add y-axis label
     svg.append("text")

@@ -18,9 +18,10 @@ df = df.groupby(['Age'])['Count'].sum()
 df.to_csv("viz_data/cancer_age.csv")
 
 # Data by type
-df_type = df_all.groupby(['Name'])['Count'].sum()
-df_type = df_type.sort_values(ascending=False)
-df_type.to_csv("viz_data/cancer_type.csv")
+df = df_all[df_all['Year'] == 2020]
+df = df.groupby(['Name'])['Count'].sum()
+df = df.sort_values(ascending=False)
+df.to_csv("viz_data/cancer_type.csv")
 
 # Data by gender
 df = df_all[df_all['Year'] == 2020]
