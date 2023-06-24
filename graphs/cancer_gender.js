@@ -52,8 +52,11 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
         .attr('transform', d => `translate(${arc.centroid(d)})`)
         .attr('text-anchor', 'middle')
         .attr('fill', 'white')
-        .html(d => `<tspan font-weight="bold">${d.data.Gender}</tspan>\n
-      <tspan x="0" dy="1.5em" font-size="0.8em">
-        ${d.data.Count.toLocaleString()} (${((d.endAngle - d.startAngle) / (2 * Math.PI) * 100).toFixed(1)}%)
-      </tspan>`);
+        .html(d => {
+            const count = +d.data.Count;
+            return `<tspan font-weight="bold">${d.data.Gender}</tspan>\n
+            <tspan x="0" dy="1.5em" font-size="0.8em">
+                ${count.toLocaleString()} (${((d.endAngle - d.startAngle) / (2 * Math.PI) * 100).toFixed(1)}%)
+            </tspan>`;
+        });
 });
