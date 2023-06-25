@@ -33,13 +33,13 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
 
     // Abbreviate type names to a maximum of 6 characters
     data.forEach(function (d) {
-        d.Name = d.Name.slice(0, 8) + (d.Name.length > 8 ? "." : "");
+        d.Name = d.Name.slice(0, 6) + (d.Name.length > 6 ? "." : "");
     });
 
     // Set up the dimensions and margins of the plot
     const margin = { top: 50, right: 20, bottom: 40, left: 60 };
-    const width = 560 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const width = 640 - margin.left - margin.right;
+    const height = 360 - margin.top - margin.bottom;
 
     // Create the SVG element
     const svg = d3.select("#graph_type")
@@ -56,7 +56,7 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
         .padding(0.1);
 
     const y = d3.scaleLinear()
-        .domain([0, Math.ceil(d3.max(data, d => +d.Count) / 20000) * 20000])
+        .domain([0, Math.ceil(d3.max(data, d => +d.Count) / 1000) * 1000])
         .range([height, 0]);
 
     // Create the bars

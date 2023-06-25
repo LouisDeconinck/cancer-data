@@ -35,8 +35,8 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
 
     // Set up the dimensions and margins of the plot
     const margin = { top: 50, right: 20, bottom: 40, left: 60 };
-    const width = 560 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const width = 640 - margin.left - margin.right;
+    const height = 360 - margin.top - margin.bottom;
 
     // Create the SVG element
     const svg = d3.select("#graph_age")

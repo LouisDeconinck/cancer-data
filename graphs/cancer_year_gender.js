@@ -5,8 +5,8 @@ d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_da
 
     // Set the dimensions and margins of the graph
     const margin = { top: 50, right: 120, bottom: 20, left: 60 };
-    const width = 560 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const width = 640 - margin.left - margin.right;
+    const height = 360 - margin.top - margin.bottom;
 
     // Create the SVG element
     const svg = d3.select("#graph_year_gender")

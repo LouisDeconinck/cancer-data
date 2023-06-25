@@ -1,8 +1,8 @@
 d3.csv("https://raw.githubusercontent.com/LouisDeconinck/cancer-data/main/viz_data/cancer_gender.csv").then(function (data) {
 
     const margin = { top: 50, right: 0, bottom: 20, left: 0 };
-    const width = 560 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const width = 640 - margin.left - margin.right;
+    const height = 360 - margin.top - margin.bottom;
     const radius = Math.min(width, height) / 2;
 
     // Define the color scale
